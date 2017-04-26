@@ -97,44 +97,46 @@
 									</thead>
 									<tbody>
 										<?php if (is_array($articulos)): ?>
-										<?php foreach($articulos as $u):?>
-										<tr>
-											<td>
-												<?= $u['id'] ?>
-											</td>
-											<td><i class="ax ax-drag-drop"></i>
-												<input type="checkbox" name="articulo_id[]" value="<?= $u['id'] ?>">
-											</td>
-											<td>
-												<?= $u['titulo'] ?>
-											</td>
-											<td>
-												<center>
-													<?php if($u['destacado'] == 1):?><i class="fa fa-check-square-o" aria-hidden="true"></i>
-													<?php else: ?><i class="fa fa-square-o" aria-hidden="true"><?php endif ?></i></center>
-											</td>
-											<td>
-												<center>
-													<?php if($u['publicar'] == 1):?><i class="fa fa-check-square-o" aria-hidden="true"></i>
-													<?php else: ?><i class="fa fa-square-o" aria-hidden="true"><?php endif ?></i></center>
-											</td>
-											<td>
-												<?= $u['categoria'] ?>
-											</td>
-											<td>
-												<?= $u['creado'] ?>
-											</td>
-											<td>
-												<?php if($u['foto'] != ''):?><i class="fa fa-picture-o" aria-hidden="true"><?php endif ?></i>
-											</td>
-											<td>
-												<center>
-													<a href="ax-noticias/articulos/editar/<?= $u['id'] ?>" class="margin-right-normal" title="<?= BOTON_EDITAR ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-													<a href="ax-noticias/articulos/borrar/<?= $u['id'] ?>" title="<?= BOTON_BORRAR ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
-												</center>
-											</td>
-										</tr>
-										<?php endforeach?>
+    										<?php foreach($articulos as $u):?>
+    										<tr>
+    											<td>
+    												<?= $u['id'] ?>
+    											</td>
+    											<td><i class="ax ax-drag-drop"></i>
+    												<input type="checkbox" name="articulo_id[]" value="<?= $u['id'] ?>">
+    											</td>
+    											<td>
+    												<?= $u['titulo'] ?>
+    											</td>
+    											<td>
+    												<center>
+    													<?php if($u['destacado'] == 1):?><i class="fa fa-check-square-o" aria-hidden="true"></i>
+    													<?php else: ?><i class="fa fa-square-o" aria-hidden="true"><?php endif ?></i>
+                                                    </center>
+    											</td>
+    											<td>
+    												<center>
+    													<?php if($u['publicar'] == 1):?><i class="fa fa-check-square-o" aria-hidden="true"></i>
+    													<?php else: ?><i class="fa fa-square-o" aria-hidden="true"><?php endif ?></i>
+                                                    </center>
+    											</td>
+    											<td>
+    												<?= $u['categoria'] ?>
+    											</td>
+    											<td>
+    												<?= $u['creado'] ?>
+    											</td>
+    											<td>
+    												<?php if($u['foto'] != ''):?><i class="fa fa-picture-o" aria-hidden="true"><?php endif ?></i>
+    											</td>
+    											<td>
+    												<center>
+    													<a href="ax-noticias/articulos/editar/<?= $u['id'] ?>" class="margin-right-normal" title="<?= BOTON_EDITAR ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    													<a href="ax-noticias/articulos/borrar/<?= $u['id'] ?>" title="<?= BOTON_BORRAR ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+    												</center>
+    											</td>
+    										</tr>
+    										<?php endforeach?>
 										<?php endif ?>
 									</tbody>
 								</table>
