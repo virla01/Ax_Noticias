@@ -1,0 +1,72 @@
+		<?= $this->insert('html/includes/header') ?>
+
+		<?= $this->insert('html/includes/barra') ?>
+
+		<?= $this->insert('html/includes/menu') ?>
+
+
+		<div class="contenido-pagina clearfix" id="contenido-pagina">
+			<div class="contenido-pagina-wrapper">
+				<div class="contenido-pagina-inner">
+					<div id="header-pagina" class="clearfix">
+						<div class="header-pagina">
+							<h2>Etiquetas</h2>
+						</div>
+					</div>
+					<!-- Comienza contenido general del sitio -->
+					<div class="row">
+						<!-- Columna 01 -->
+						<div class="movil-12 pc-12">
+							<div class="panel color-bg-info">
+								<div class="panel-header">
+									<h4 class="panel-title">
+										<i class="fa fa-newspaper-o"></i>
+										Crear nueva etiqueta
+									</h4>
+									<div class="panel-controls panel-controls-right">
+										<span class="collapse-link">
+											<i class="fa fa-chevron-up"></i>
+										</span>
+										<span class="close-link">
+											<i class="fa fa-times"></i>
+										</span>
+									</div>
+								</div>
+								<div class="panel-body">
+									<form action="ax-noticias/tags/crear" method="post" role="form" enctype="multipart/form-data">
+										<div class="botonera">
+											<div class="form-grupo">
+												<button type="submit" class="boton success">Enviar<i class="fa fa-caret-right"></i></button>
+												<a href="ax-noticias/tags" class="boton danger">Cancelar<i class="fa fa-ban"></i></a>
+											</div>
+										</div>
+										<div class="form-grupo">
+											<label class="movil-12 pc-3">Etiqueta<span class="marcador-rojo"> *</span></label>
+											<div class="movil-12 pc-9">
+												<input type="text" name="titulo" id="titulo" placeholder="Etiqueta" required>
+											</div>
+										</div>
+										<div class="form-grupo">
+											<label class="movil-12 pc-3">Alias</label>
+											<div class="movil-12 pc-9">
+												<input type="text" name="alias" id="alias" placeholder="Alias">
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Finaliza contenido general del sitio -->
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- FINALIZA EL WRAPPER -->
+
+
+	<?= $this->insert('html/includes/modules') ?>
+
+
+	<?= $this->insert('html/includes/footer') ?>

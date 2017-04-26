@@ -1,0 +1,146 @@
+		<?= $this->insert('html/includes/header') ?>
+
+		<?= $this->insert('html/includes/barra') ?>
+
+		<?= $this->insert('html/includes/menu') ?>
+
+		<?php require('core/lenguaje/'. LENGUAJE .'/'. LENGUAJE .'.ax-noticias.php'); ?>
+
+		<div class="contenido-pagina clearfix" id="contenido-pagina">
+			<div class="contenido-pagina-wrapper">
+				<div class="contenido-pagina-inner">
+					<div id="header-pagina" class="clearfix">
+						<div class="header-pagina">
+							<h2><?= TITULO_AXNOTICIAS_TAPAS ?></h2>
+						</div>
+					</div>
+					<!-- Comienza contenido general del sitio -->
+					<div class="row">
+						<!-- Columna 01 -->
+						<div class="movil-12 pc-12">
+							<div class="panel color-bg-info">
+								<div class="panel-header">
+									<h4 class="panel-title">
+										<i class="fa fa-newspaper-o"></i>
+										<?= TITULO_AXNOTICIAS_TAPAS_EDITAR ?> <?= $tapas['nombre']?>
+									</h4>
+									<div class="panel-controls panel-controls-right">
+										<span class="collapse-link">
+											<i class="fa fa-chevron-up"></i>
+										</span>
+										<span class="close-link">
+											<i class="fa fa-times"></i>
+										</span>
+									</div>
+								</div>
+								<div class="panel-body">
+									<form action="ax-noticias/tapas/editar/<?= $tapas['id']?>" method="post" role="form" enctype="multipart/form-data">
+										<div class="botonera">
+											<div class="form-grupo">
+												<button type="submit" class="boton success"><?= BOTON_ENVIAR ?><i class="fa fa-caret-right"></i></button>
+												<a href="ax-noticias/tapas" class="boton danger"><?= BOTON_CANCELAR ?><i class="fa fa-ban"></i></a>
+											</div>
+										</div>
+										<div class="form-grupo">
+											<label class="movil-12 pc-3"><?= CAMPO_FORM_TITULO ?><span class="marcador-rojo" title="<?= CAMPO_FORM_OBLIGATORIO ?>"><i class="fa fa-certificate" aria-hidden="true"></i></span></label>
+											<div class="movil-12 pc-9">
+												<input type="text" name="nombre" id="nombre" placeholder="<?= CAMPO_FORM_TITULO ?>" value="<?= $tapas['nombre']?>" required>
+											</div>
+										</div>
+										<div class="form-grupo">
+											<div class="subtitulo">
+												<div class="movil-12 pc-6">
+													<h5><?= TITULO_AXNOTICIAS_TAPAS ?></h5>
+												</div>
+												<div class="movil-12 pc-6">
+													<div class="boton primary positon-relative float-right">
+														<?= BOTON_SELECCIONARIMAGENES ?>
+														<input type="file" id="files" name="files[]" multiple>
+													</div>
+												</div>
+											</div>
+											<output id="list">
+												<?php
+												$files = explode("|",$tapas['imagen'],-1);
+												$count = count($files)-1;
+												$arch = str_replace("../imagenes/tapas/","",$files);
+												$ruta = "../imagenes/tapas"; // Indicar ruta
+												$filehandle = opendir($ruta); // Abrir archivos
+												$index= 0;
+												while ($index <= $count) {
+													if ($file = file_exists($ruta . "/" . $arch[$index])){
+														$file = ($ruta . "/" . $arch[$index]);
+														$file_name = $arch[$index];
+														$file_size = filesize($file);
+														$file_type = mime_content_type($file);
+														echo "<span>";
+														echo "<img class='thumb' src='" . $file . "' title='" . $file_name . "'/>";
+														echo "<input type='hidden' name='archivo[]' id='id' value='" . $file_name . "'>";
+														echo "<strong>" . $file_name . "</strong> (" . $file_type . ") - " . $file_size . " bytes </br>";
+														echo "<div class='boton danger' id='borrar'><i class='fa fa-trash sin-margin' aria-hidden='true'></i></div>";
+														echo "</span>";
+														$index++;
+													}
+												}
+												?>
+											</output>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Finaliza contenido general del sitio -->
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- FINALIZA EL WRAPPER -->
+
+
+	<?= $this->insert('html/includes/modules') ?>
+
+
+	<?= $this->insert('html/includes/footer') ?>
+
+
+	<script>
+		function handleFileSelect(evt) {
+
+			var files = evt.target.files; // FileList object
+
+			// Loop through the FileList and render image files as thumbnails.
+			for (var i = 0, f; f = files[i]; i++) {
+
+				// Only process image files.
+				if (!f.type.match('image.*')) {
+					continue;
+				}
+
+				var reader = new FileReader();
+
+				// Closure to capture the file information.
+				reader.onload = (function(theFile) {
+					return function(e) {
+						// Render thumbnail.
+						var span = document.createElement('span');
+						span.innerHTML = ['<img class="thumb" src="', e.target.result,
+										  '" title="', escape(theFile.name), '"/>',
+										  '<strong>',escape(theFile.name), '</strong> (', theFile.type || 'n/a', ') - ',
+										  theFile.size, ' bytes',].join('');
+						document.getElementById('list').insertBefore(span, null);
+					};
+				})(f);
+
+				// Read in the image file as a data URL.
+				reader.readAsDataURL(f);
+			}
+		}
+
+		document.getElementById('files').addEventListener('change', handleFileSelect, false);
+	</script>
+
+
+
+

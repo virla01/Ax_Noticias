@@ -1,0 +1,128 @@
+		<?= $this->insert('html/includes/header') ?>
+
+		<?= $this->insert('html/includes/barra') ?>
+
+		<?= $this->insert('html/includes/menu') ?>
+
+		<script src="<?= SITE_URL ?>/extras/tinymce/tinymce.min.js"></script>
+		<script type="text/javascript">
+			tinymce.init({
+				selector: '#texto',
+				theme: "modern",
+				height: 400,
+				plugins: [
+					 "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+					 "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking spellchecker",
+					 "table contextmenu directionality emoticons paste textcolor responsivefilemanager youtube codemirror"
+			   ],
+				relative_urls: false,
+				convert_urls: false,
+				browser_spellcheck : true,
+				//filemanager_crossdomain: true,
+				filemanager_title:"Explorador archivos media",
+				external_filemanager_path:"/a-diario/extras/filemanager/",
+				external_plugins: { "filemanager" : "plugins/responsivefilemanager/plugin.min.js"},
+				codemirror: {
+					indentOnInit: true, // Whether or not to indent code on init.
+					path: 'CodeMirror'
+			   },
+			   image_advtab: true,
+			   toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+			   toolbar2: "| responsivefilemanager | image | media | link unlink anchor | print preview code | youtube | forecolor backcolor | pagebreak"
+
+			});
+		</script>
+
+		<div class="contenido-pagina clearfix" id="contenido-pagina">
+			<div class="contenido-pagina-wrapper">
+				<div class="contenido-pagina-inner">
+					<div id="header-pagina" class="clearfix">
+						<div class="header-pagina">
+							<h2>Autores</h2>
+						</div>
+					</div>
+					<!-- Comienza contenido general del sitio -->
+					<div class="row">
+						<!-- Columna 01 -->
+						<div class="movil-12 pc-12">
+							<div class="panel color-bg-info">
+								<div class="panel-header">
+									<h4 class="panel-title">
+										<i class="fa fa-newspaper-o"></i>
+										Crear nuevo autor
+									</h4>
+									<div class="panel-controls panel-controls-right">
+										<span class="collapse-link">
+											<i class="fa fa-chevron-up"></i>
+										</span>
+										<span class="close-link">
+											<i class="fa fa-times"></i>
+										</span>
+									</div>
+								</div>
+								<div class="panel-body">
+									<form action="ax-noticias/autores/crear" method="post" role="form" enctype="multipart/form-data">
+										<div class="botonera">
+											<div class="form-grupo">
+												<button type="submit" class="boton success">Enviar<i class="fa fa-caret-right"></i></button>
+												<a href="ax-noticias/autores" class="boton danger">Cancelar<i class="fa fa-ban"></i></a>
+											</div>
+										</div>
+										<div class="form-grupo">
+											<label class="movil-12 pc-3">Nombre<span class="marcador-rojo"> *</span></label>
+											<div class="movil-12 pc-9">
+												<input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+											</div>
+										</div>
+										<div class="form-grupo">
+											<label class="movil-12 pc-3">Alias</label>
+											<div class="movil-12 pc-9">
+												<input type="text" name="alias" id="alias" placeholder="Alias">
+											</div>
+										</div>
+										<div class="form-grupo">
+											<label class="movil-12 pc-3">Imagen<span class="marcador-rojo"> *</span></label>
+											<div class="fileinput movil-12 pc-9">
+												<input  id="imagen" name="imagen" type="text" value="" class="file-input margin-bottom-normal" placeholder="No hay archivo seleccionado...">
+												<a href="javascript:open_popup('/a-diario/extras/filemanager/dialog.php?type=0&popup=1&field_id=imagen&relative_url=imagenes/autores/')" class="boton boton-file info" type="button">Seleccionar</a>
+											</div>
+										</div>
+										<div class="form-grupo">
+											<label class="movil-12 pc-3">Link</label>
+											<div class="movil-12 pc-9">
+												<input type="text" name="link" id="link" placeholder="Link" required>
+											</div>
+										</div>
+										<div class="form-grupo">
+											<label class="movil-12 pc-3">Descripción</label>
+											<div class="movil-12 pc-9">
+												<textarea type="text" name="descripcion" class="movil-12" id="descripcion"></textarea>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Finaliza contenido general del sitio -->
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- FINALIZA EL WRAPPER -->
+
+	<script>
+		function open_popup(url){
+			var w = 880;
+			var h = 570;
+			var l = Math.floor((screen.width-w)/2);
+			var t = Math.floor((screen.height-h)/2);
+			var win = window.open(url, 'Explorador archivos multimedia', "scrollbars=1,width=" + w + ",height=" + h + ",top=" + t + ",left=" + l);
+		}
+	</script>
+
+	<?= $this->insert('html/includes/modules') ?>
+
+
+	<?= $this->insert('html/includes/footer') ?>

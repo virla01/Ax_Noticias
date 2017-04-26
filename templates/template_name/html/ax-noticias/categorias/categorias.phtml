@@ -1,0 +1,141 @@
+		<?= $this->insert('html/includes/header') ?>
+
+		<?= $this->insert('html/includes/barra') ?>
+
+		<?= $this->insert('html/includes/menu') ?>
+
+		<link rel="stylesheet" href="<?php echo PATH_TEMPLATE ?>/css/tablas.css">
+
+		<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/rowreorder/1.1.2/js/dataTables.rowReorder.min.js"></script>
+		<script src="<?php echo PATH_TEMPLATE ?>/js/tablas.js"></script>
+
+		<?php require('core/lenguaje/'. LENGUAJE .'/'. LENGUAJE .'.ax-noticias.php'); ?>
+
+		<div class="contenido-pagina clearfix" id="contenido-pagina">
+			<div class="contenido-pagina-wrapper">
+				<div class="contenido-pagina-inner">
+					<div id="header-pagina" class="clearfix">
+						<div class="header-pagina">
+							<h2><?= TITULO_AXNOTICIAS_CATEGORIA ?></h2>
+							<div class="panel-botones">
+								<a href="ax-noticias/categorias/crear" class="boton success"><?= BOTON_NUEVO ?></a>
+								<button type="button" id="borraCat" class="boton danger"><?= BOTON_BORRAR ?></button>
+								<button type="button" id="activaCat" class="boton info"><?= BOTON_ACTIVAR ?></button>
+								<button type="button" id="desactivaCat" class="boton warning"><?= BOTON_DESACTIVAR ?></button>
+								<div class="alertas hide" id="ajax_alerta"></div>
+							</div>
+						</div>
+					</div>
+					<!-- Comienza contenido general del sitio -->
+					<div class="row">
+						<!-- Columna 01 -->
+						<div class="movil-12 pc-12">
+							<div class="panel color-bg-info">
+								<div class="panel-header">
+									<h4 class="panel-title">
+										<i class="fa fa-newspaper-o"></i>
+										<?= TITULO_AXNOTICIAS_LISTADO_CATEGORIA ?>
+									</h4>
+									<div class="panel-controls panel-controls-right">
+										<span class="collapse-link">
+											<i class="fa fa-chevron-up"></i>
+										</span>
+										<span class="close-link">
+											<i class="fa fa-times"></i>
+										</span>
+									</div>
+								</div>
+								<div class="panel-body">
+									<!-- Para mas info datatables.net -->
+									<script>
+										$(document).ready(function () {
+											var table = $('#tabla-listado').DataTable({
+												"language": {
+													"sProcessing": "Procesando...",
+													"sLengthMenu": "Mostrar _MENU_ registros",
+													"sZeroRecords": "No se encontraron resultados",
+													"sEmptyTable": "Ningún dato disponible en esta tabla",
+													"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+													"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+													"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+													"sInfoPostFix": "",
+													"sSearch": "Buscar:",
+													"sUrl": "",
+													"sInfoThousands": ",",
+													"sLoadingRecords": "Cargando...",
+													"oPaginate": {
+														"sFirst": "Primero",
+														"sLast": "Último",
+														"sNext": "Siguiente",
+														"sPrevious": "Anterior"
+													},
+													"oAria": {
+														"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+														"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+													}
+												},
+												columnDefs: [
+													{
+														targets: 0,
+														visible: false
+													}
+								]
+											});
+
+										});
+									</script>
+									<div id="result"></div>
+									<form method="post" id="formid">
+										<table id="tabla-listado" cellspacing="0" width="100%">
+											<thead>
+												<tr role="row">
+													<th><?= TITULO_LISTADO_ID ?></th>
+													<th> </th>
+													<th><?= TITULO_LISTADO_TITULO ?></th>
+													<th><?= TITULO_LISTADO_IMAGEN ?></th>
+													<th><?= TITULO_LISTADO_ESTADO ?></th>
+													<th><?= TITULO_LISTADO_ACCION ?></th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php if (is_array($categoria)): ?>
+													<?php foreach($categoria as $u):?>
+														<tr>
+															<td><?= $u['id'] ?></td>
+															<td style="width: 57px;"><i class="ax ax-drag-drop" aria-hidden="true"></i><input type="checkbox" name="categoria_id[]" value="<?= $u['id'] ?>"></td>
+															<td><?= $u['titulo'] ?></td>
+															<td><?php if($u['imagen'] != ''):?><i class="fa fa-picture-o" aria-hidden="true"></i><?php endif ?></td>
+															<td><center><?php if($u['publicar'] == 1):?><i class="fa fa-check-square-o texto-verde" aria-hidden="true"></i><?php else: ?><i class="fa fa-square-o" aria-hidden="true"><?php endif ?></i></center></td>
+															<td>
+																<center>
+																	<a href="ax-noticias/categorias/editar/<?= $u['id'] ?>" class="margin-right-normal" title="<?= BOTON_EDITAR ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+																	<a href="ax-noticias/categorias/borrar/<?= $u['id'] ?>" title="<?= BOTON_BORRAR ?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+																</center>
+															</td>
+														</tr>
+														<?php endforeach?>
+													<?php endif ?>
+											</tbody>
+										</table>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Finaliza contenido general del sitio -->
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- FINALIZA EL WRAPPER -->
+
+
+	<?= $this->insert('html/includes/modules') ?>
+
+
+	<?= $this->insert('html/includes/footer') ?>
+
+
+	<script src="<?php echo PATH_TEMPLATE ?>/js/botoneraCat.js"></script>
